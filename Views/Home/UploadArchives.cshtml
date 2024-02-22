@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Загрузка архивов";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" enctype="multipart/form-data" asp-action="TryUploadArchives">
+    <label for="archives">Архив:</label>
+    <input name="archives" id="archives" type="file" multiple accept=".xlsx" />
+    <input type="submit" value="Загрузить" />
+</form>

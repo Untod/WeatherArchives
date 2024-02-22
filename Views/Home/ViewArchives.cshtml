@@ -1,0 +1,123 @@
+﻿@model PaginatedList<TestTask_DynamicSun.Models.WeatherDetails>
+
+@{
+    ViewData["Title"] = "Просмотр архивов";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="get">
+    <p>
+        Год: &nbsp; <input type="number" name="year" value="@ViewData["YearFilter"]" /> &nbsp;
+        Месяц: &nbsp; <input type="number" name="month" value="@ViewData["MonthFilter"]" />
+        <input type="submit" value="Применить фильтры" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Date) *@
+                Дата
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Temperature) *@
+                Температура
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.RelativeHumidity) *@
+                Относительная влажность
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.DewPoint) *@
+                Точка росы
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.AtmosphericPressure) *@
+                Атмосферное давление
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.WindDirection) *@
+                Направление ветра
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.WindSpeed) *@
+                Скорость ветра
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Cloudiness) *@
+                Облачность
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.CloudBase) *@
+                Нижняя граница облачности
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.HorizontalVisibility) *@
+                Горизонтальна видимость
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Conditions) *@
+                Погодные явления
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Temperature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RelativeHumidity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DewPoint)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AtmosphericPressure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WindDirection)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WindSpeed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cloudiness)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CloudBase)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HorizontalVisibility)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Conditions)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<p>
+    Страница @Model.CurrentPage из @Model.TotalPages
+    <br />
+    @if (Model.HasPreviousPage)
+    {
+        <a asp-route-page="@(Model.CurrentPage - 1)"
+            asp-route-year="@ViewData["YearFilter"]"
+            asp-route-month="@ViewData["MonthFilter"]">Назад</a>
+    }
+    @if (Model.HasPreviousPage && Model.HasNextPage) { <span>|</span> }
+    @if (Model.HasNextPage)
+    {
+        <a asp-route-page="@(Model.CurrentPage + 1)"
+            asp-route-year="@ViewData["YearFilter"]"
+            asp-route-month="@ViewData["MonthFilter"]">Вперёд</a>
+    }
+</p>
